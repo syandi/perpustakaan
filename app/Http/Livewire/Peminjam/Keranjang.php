@@ -40,6 +40,10 @@ class Keranjang extends Component
         redirect('/');
     }
 
+    public function test() {
+      dd('oke');
+    }
+
     public function pinjam(Peminjaman $keranjang)
     {
         $this->validate();

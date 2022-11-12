@@ -14,18 +14,17 @@ use App\Http\Controllers\Petugas\TransaksiController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-
-Route::get('/', PeminjamBukuController::class);
-
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
+    // Route::get('/', PeminjamBukuController::class);
+    
     Route::get('/cek-role', CekRoleController::class);
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     // role admin dan petugas
     Route::middleware(['role:admin|petugas'])->group(function () {
-        Route::get('/dashboard', DashboardController::class);
+        Route::get('/', DashboardController::class);
 
         Route::get('/kategori', KategoriController::class);
         Route::get('/rak', RakController::class);
@@ -36,9 +35,9 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // role peminjam
-    Route::middleware(['role:peminjam'])->group(function () {
-        Route::get('/keranjang', KeranjangController::class);
-    });
+    // Route::middleware(['role:peminjam'])->group(function () {
+    //     Route::get('/keranjang', KeranjangController::class);
+    // });
 
     // role admin
     Route::middleware(['role:admin'])->group(function () {

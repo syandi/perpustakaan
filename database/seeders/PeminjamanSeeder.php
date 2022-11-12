@@ -36,7 +36,7 @@ class PeminjamanSeeder extends Seeder
                 'petugas_pinjam' => random_int(1,2),
                 'petugas_kembali' => random_int(1,2),
                 'denda' => 0,
-                'status' => 3,
+                'status' => random_int(1,2),
                 'tanggal_pinjam' => $tanggal_pinjam,
                 'tanggal_kembali' => $tanggal_kembali,
                 'tanggal_pengembalian' => $tanggal_pengembalian

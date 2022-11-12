@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/cek-role';
+    public const HOME = '/dashboard';
 
     /**
      * The controller namespace for the application.

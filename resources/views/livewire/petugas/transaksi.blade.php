@@ -70,7 +70,9 @@
                         <td>{{$item->tanggal_kembali}}</td>
                         <td>{{$item->denda}}</td>
                         <td>
-                            @if ($item->status == 1)
+                            @if ($item->status == 0)
+                                <span class="badge bg-indigo">Loading</span>
+                            @elseif ($item->status == 1)
                                 <span class="badge bg-indigo">Belum Dipinjam</span>
                             @elseif ($item->status == 2)
                                 <span class="badge bg-olive">Sedang Dipinjam</span>

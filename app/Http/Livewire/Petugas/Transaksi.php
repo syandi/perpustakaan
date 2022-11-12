@@ -2,8 +2,14 @@
 
 namespace App\Http\Livewire\Petugas;
 
+use App\Models\Buku;
+use App\Models\DetailPeminjaman;
 use App\Models\Peminjaman;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,11 +19,66 @@ class Transaksi extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $create, $belum_dipinjam, $sedang_dipinjam, $selesai_dipinjam, $search;
+    public $books, $data;
+    public $nik, $tanggal_pinjam, $tanggal_kembali;
+    public $product = [], $product_id;
 
+    public function addProduct() {
+      $findData = Arr::where($this->product, function ($value, $key) {
+          return $value['id'] == $this->product_id;
+      });
+
+      if ($findData) {
+        return session()->flash('gagal', 'Buku sudah ada dalam daftar');
+      }
+      
+      $book = Buku::where('id', $this->product_id)->first();
+
+      if ($book) {
+        $this->product[] = $book;
+        $this->product_id = '';
+      }
+    }
+    
     public function create()
     {
         $this->create = true;
+        $this->books = Buku::where('status', true)->get();
         // $this->kategori = Kategori::all();
+    }
+
+    public function store()
+    {
+      $this->validate([
+          'nik' => 'required|string',
+          'tanggal_pinjam' => 'required',
+          'tanggal_kembali' => 'required',
+          'product' => 'required|array|min:1',
+      ]);
+
+      DB::transaction(function()
+      {
+        $peminjaman = new Peminjaman();
+        $peminjaman->kode_pinjam = Str::random(9);
+        $peminjaman->peminjam_id = $this->nik;
+        $peminjaman->petugas_pinjam = auth()->user()->id;
+        $peminjaman->status = 1;
+        $peminjaman->denda = 0;
+        $peminjaman->tanggal_pinjam = $this->tanggal_pinjam;
+        $peminjaman->tanggal_kembali = $this->tanggal_kembali;
+        $peminjaman->save();
+
+        foreach ($this->product as $item) {
+            $detail = new DetailPeminjaman();
+            $detail->peminjaman_id = $peminjaman->id;
+            $detail->buku_id = $item['id'];
+            $detail->save();
+        }
+      });
+
+      session()->flash('sukses', 'Data berhasil ditambahkan.');
+
+      $this->format();
     }
 
     public function belumDipinjam()
