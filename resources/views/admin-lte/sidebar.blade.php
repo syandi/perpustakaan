@@ -77,14 +77,14 @@
             </a>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="/chart" class="nav-link @yield('active-chart')">
               <i class="fas fa-chart-bar"></i>
               <p>
                 Chart
               </p>
             </a>
-          </li>
+          </li> -->
          
           @role('admin')
               <li class="nav-header">ADMIN</li>

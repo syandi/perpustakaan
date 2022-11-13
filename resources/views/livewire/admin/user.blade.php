@@ -9,7 +9,7 @@
         <button wire:click="format" class="btn btn-sm bg-teal mr-2">Semua</button>
         <button wire:click="admin" class="btn btn-sm bg-indigo mr-2">Admin</button>
         <button wire:click="petugas" class="btn btn-sm bg-olive mr-2">Petugas</button>
-        <button wire:click="peminjam" class="btn btn-sm bg-fuchsia mr-2">Peminjam</button>
+        <!-- <button wire:click="peminjam" class="btn btn-sm bg-fuchsia mr-2">Peminjam</button> -->
     </div>
 
     <div class="card">

@@ -84,6 +84,7 @@
                             <td>
                                 @if ($item->status == 1)
                                     <span wire:click="pinjam({{$item->id}})" class="btn btn-sm btn-success mr-2">Pinjam</span>
+                                    <span wire:click="batal({{$item->id}})" class="btn btn-sm btn-danger mr-2">Batal</span>
                                 @elseif ($item->status == 2)
                                     <span wire:click="kembali({{$item->id}})" class="btn btn-sm btn-primary mr-2">Kembali</span>
                                 @endif
