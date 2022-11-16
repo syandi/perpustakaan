@@ -10,6 +10,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <label for="kode">Kode Buku</label>
+                        <input wire:model="kode" type="text" class="form-control" id="kode">
+                        @error('kode') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="judul">Judul</label>
                         <input wire:model="judul" type="text" class="form-control" id="judul">
                         @error('judul') <small class="text-danger">{{ $message }}</small> @enderror
@@ -96,6 +101,10 @@
                                 @error('status') <small class="text-danger">{{ $message }}</small> @enderror
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="catatan">Catatan</label>
+                        <textarea wire:model="catatan" type="text" class="form-control" id="catatan"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">

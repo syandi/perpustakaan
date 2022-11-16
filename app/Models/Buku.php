@@ -11,6 +11,7 @@ class Buku extends Model
 
     protected $table = 'buku';
     protected $fillable = [
+        'kode',
         'judul',
         'stok',
         'sampul',
@@ -21,6 +22,7 @@ class Buku extends Model
         'penerbit_id',
         'status',
         'kondisi',
+        'catatan',
     ];
 
     public function kategori()

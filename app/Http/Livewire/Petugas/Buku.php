@@ -21,9 +21,10 @@ class Buku extends Component
     public $create, $edit, $delete, $show;
     public $kategori, $rak, $penerbit;
     public $kategori_id, $rak_id, $penerbit_id, $baris, $status, $kondisi;
-    public $judul, $stok, $penulis, $sampul, $buku_id, $search;
+    public $kode, $judul, $stok, $penulis, $sampul, $buku_id, $search, $catatan;
 
     protected $rules = [
+        'kode' => 'required',
         'judul' => 'required',
         'penulis' => 'required',
         // 'stok' => 'required|numeric|min:1',
@@ -33,6 +34,7 @@ class Buku extends Component
         'penerbit_id' => 'required|numeric|min:1',
         'status' => 'required',
         'kondisi' => 'required',
+        'catatan' => 'nullable',
     ];
 
     protected $validationAttributes = [
@@ -62,6 +64,7 @@ class Buku extends Component
         $this->sampul = $this->sampul->store('buku', 'public');
 
         ModelsBuku::create([
+            'kode' => $this->kode,
             'sampul' => $this->sampul,
             'judul' => $this->judul,
             'penulis' => $this->penulis,
@@ -71,6 +74,7 @@ class Buku extends Component
             'penerbit_id' => $this->penerbit_id,
             'status' => $this->status,
             'kondisi' => $this->kondisi,
+            'catatan' => $this->catatan,
             'slug' => Str::slug($this->judul)
         ]);
 
@@ -83,6 +87,7 @@ class Buku extends Component
         $this->format();
 
         $this->show = true;
+        $this->kode = $buku->kode;
         $this->judul = $buku->judul;
         $this->sampul = $buku->sampul;
         $this->penulis = $buku->penulis;
@@ -93,6 +98,7 @@ class Buku extends Component
         $this->baris = $buku->rak->baris;
         $this->kondisi = $buku->kondisi;
         $this->status = $buku->status == true ? 'Tersedia' : 'Dipinjam';
+        $this->catatan = $buku->catatan;
     }
 
     public function edit(ModelsBuku $buku)
@@ -100,6 +106,7 @@ class Buku extends Component
         $this->format();
 
         $this->edit = true;
+        $this->kode = $buku->kode;
         $this->buku_id = $buku->id;
         $this->judul = $buku->judul;
         $this->penulis = $buku->penulis;
@@ -109,6 +116,7 @@ class Buku extends Component
         $this->penerbit_id = $buku->penerbit_id;
         $this->status = $buku->status;
         $this->kondisi = $buku->kondisi;
+        $this->catatan = $buku->catatan;
         $this->kategori = Kategori::all();
         $this->rak = Rak::where('kategori_id', $buku->kategori_id)->get();
         $this->penerbit = Penerbit::all();
@@ -117,6 +125,7 @@ class Buku extends Component
     public function update(ModelsBuku $buku)
     {
         $validasi = [
+            'kode' => 'required',
             'judul' => 'required',
             'penulis' => 'required',
             'stok' => 'required|numeric|min:1',
@@ -124,7 +133,8 @@ class Buku extends Component
             'rak_id' => 'required|numeric|min:1',
             'penerbit_id' => 'required|numeric|min:1',
             'kondisi' => 'required',
-            'status' => 'required|boolean'
+            'status' => 'required|boolean',
+            'catatan' => 'nullable',
         ];
 
         if ($this->sampul) {
@@ -142,6 +152,7 @@ class Buku extends Component
 
         $buku->update([
             'sampul' => $this->sampul,
+            'kode' => $this->kode,
             'judul' => $this->judul,
             'penulis' => $this->penulis,
             'stok' => $this->stok,
@@ -150,6 +161,7 @@ class Buku extends Component
             'penerbit_id' => $this->penerbit_id,
             'kondisi' => $this->kondisi,
             'status' => $this->status,
+            'catatan' => $this->catatan,
             'slug' => Str::slug($this->judul)
         ]);
 

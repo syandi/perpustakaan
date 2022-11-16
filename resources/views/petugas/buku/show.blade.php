@@ -19,6 +19,11 @@
                              <table class="table text-nowrap">
                                 <tbody>
                                     <tr>
+                                        <th>Kode Buku</th>
+                                        <td>:</td>
+                                        <td>{{$kode}}</td>
+                                    </tr>
+                                    <tr>
                                         <th>Judul</th>
                                         <td>:</td>
                                         <td>{{$judul}}</td>
@@ -67,6 +72,10 @@
                             </table>
                          </div>
                      </div>
+                      <div>
+                          <h5>Catatan :</h5>
+                          <p>{{$catatan}}</p>
+                      </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                 <span wire:click="format" type="button" class="btn btn-default" data-dismiss="modal">Kembali</span>

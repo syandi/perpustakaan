@@ -16,6 +16,7 @@ class BukuSeeder extends Seeder
     public function run()
     {
         Buku::create([
+            'kode' => Str::random(),
             'judul' => 'bintang',
             'slug' => Str::slug('bintang'),
             'sampul' => 'buku/Sampul_novel_Bintang.jpeg',
@@ -30,6 +31,7 @@ class BukuSeeder extends Seeder
         ]);
 
         Buku::create([
+            'kode' => Str::random(),
             'judul' => 'matahari',
             'slug' => Str::slug('matahari'),
             'sampul' => 'buku/Sampul_novel_Matahari.jpeg',
@@ -44,6 +46,7 @@ class BukuSeeder extends Seeder
         ]);
 
         Buku::create([
+            'kode' => Str::random(),
             'judul' => 'tentang kamu',
             'slug' => Str::slug('tentang-kamu'),
             'sampul' => 'buku/Tentang_Kamu_sampul.jpeg',
@@ -58,6 +61,7 @@ class BukuSeeder extends Seeder
         ]);
 
         Buku::create([
+            'kode' => Str::random(),
             'judul' => 'gusdur',
             'slug' => Str::slug('gusdur'),
             'sampul' => 'buku/gusdur.jpg',
@@ -72,6 +76,7 @@ class BukuSeeder extends Seeder
         ]);
 
         Buku::create([
+            'kode' => Str::random(),
             'judul' => 'habibie',
             'slug' => Str::slug('habibie'),
             'sampul' => 'buku/habibie.jpg',
@@ -86,6 +91,7 @@ class BukuSeeder extends Seeder
         ]);
 
         Buku::create([
+            'kode' => Str::random(),
             'judul' => 'naruto volume 58',
             'slug' => Str::slug('naruto-volume-58'),
             'sampul' => 'buku/naruto-58.jpg',
@@ -100,6 +106,7 @@ class BukuSeeder extends Seeder
         ]);
 
         Buku::create([
+            'kode' => Str::random(),
             'judul' => 'naruto volume 71',
             'slug' => Str::slug('naruto-volume-71'),
             'sampul' => 'buku/naruto-71.jpg',

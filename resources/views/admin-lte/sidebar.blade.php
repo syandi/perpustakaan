@@ -23,7 +23,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="/dashboard" class="nav-link @yield('active-dashboard')">
+            <a href="/" class="nav-link @yield('active-dashboard')">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard

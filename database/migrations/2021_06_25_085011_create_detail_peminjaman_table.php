@@ -16,7 +16,7 @@ class CreateDetailPeminjamanTable extends Migration
         Schema::create('detail_peminjaman', function (Blueprint $table) {
             $table->id();
             $table->foreignId('peminjaman_id');
-            $table->foreignId('buku_id');
+            $table->foreignId('buku_id')->constrained('buku');
             $table->timestamps();
         });
     }
