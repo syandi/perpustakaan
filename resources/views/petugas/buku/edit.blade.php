@@ -1,4 +1,4 @@
- @if ($edit)
+ @if ($edit || $copy)
         <div class="modal fade show" id="modal-default" style="display: block; padding-right: 17px;">
             <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -109,7 +109,11 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                 <span wire:click="format" type="button" class="btn btn-default" data-dismiss="modal">Batal</span>
+                @if($edit)
                 <span type="button" wire:click="update({{$buku_id}})" class="btn btn-success">Update</span>
+                @elseif($copy)
+                <span type="button" wire:click="duplicate()" class="btn btn-success">Simpan</span>
+                @endif
                 </div>
             </div>
             </div>

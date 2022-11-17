@@ -30,28 +30,34 @@
             <table class="table table-hover text-nowrap">
                 <thead>
                 <tr>
-                    <th width="10%">No</th>
+                    <th width="10%">Kode</th>
                     <th>Judul</th>
                     <th>Penulis</th>
                     <th>Kategori</th>
                     <th>Status</th>
-                    <th width="15%">Aksi</th>
+                    <th width="10%">Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach ($buku as $item)
                     <tr>
-                        <td>{{$loop->iteration}}</td>
+                        <td>{{$item->kode}}</td>
                         <!-- <td><img src="/storage/{{$item->sampul}}" alt="{{$item->judul}}" width="60" height="80"></td> -->
                         <td>{{$item->judul}}</td>
                         <td>{{$item->penulis}}</td>
                         <td>{{$item->kategori->nama}}</td>
                         <td class="{{$item->status == true ? 'text-success' : ''}}">{{$item->status == true ? 'Tersedia' : 'Dipinjam'}}</td>
                         <td>
-                            <div class="btn-group">
-                                <span wire:click="show({{$item->id}})" class="btn btn-sm btn-success mr-2">Lihat</span>
-                                <span wire:click="edit({{$item->id}})" class="btn btn-sm btn-primary mr-2">Edit</span>
-                                <span wire:click="delete({{$item ->id}})" class="btn btn-sm btn-danger">Hapus</span>
+                            <div class="dropdown">
+                              <a id="dropdownAction" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+                                <i class="fa fa-ellipsis-h text-primary"></i>
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="dropdownAction">
+                                <button wire:click="show({{$item->id}})" class="dropdown-item text-success"><i class="fa fa-eye text-sm"></i> Lihat</button>
+                                <button wire:click="edit({{$item->id}})" class="dropdown-item text-primary"><i class="fa fa-pencil-alt text-sm"></i> Edit</button>
+                                <button wire:click="edit({{$item->id}}, 'copy')" class="dropdown-item text-warning"><i class="fa fa-copy text-sm"></i> Salin</button> 
+                                <button wire:click="delete({{$item ->id}})" class="dropdown-item text-danger"><i class="fa fa-trash text-sm"></i> Hapus</button>
+                              </div>
                             </div>
                         </td>
                     </tr>

@@ -32,14 +32,15 @@
                     @endforeach
                 </div>
                 <div class="form-group d-flex">
-                    <select wire:model="product_id" id="product_id" class="form-control">
+                    <!-- <select wire:model="kode_buku" id="kode_buku" class="form-control">
                       @foreach ($books as $key => $item)
                           <option value="" hidden>Pilih Buku</option>
                           <option value="{{ $item->id }}">{{ $item->judul }}</option>
                       @endforeach
-                    </select>
+                    </select> -->
+                    <input wire:model="kode_buku" type="text" class="form-control" id="key" placeholder="Masukkan kode Buku">
                     <button type="button" wire:click="addProduct" class="btn btn-primary ml-2">
-                      Tambahkan
+                      Cari
                     </button>
                 </div>
                 <div class="form-group">

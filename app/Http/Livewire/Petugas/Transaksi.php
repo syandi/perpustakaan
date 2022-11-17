@@ -21,23 +21,25 @@ class Transaksi extends Component
     public $create, $belum_dipinjam, $sedang_dipinjam, $selesai_dipinjam, $search;
     public $books, $data;
     public $nik, $tanggal_pinjam, $tanggal_kembali;
-    public $product = [], $product_id;
+    public $product = [], $kode_buku;
 
     public function addProduct() {
-      $findData = Arr::where($this->product, function ($value, $key) {
-          return $value['id'] == $this->product_id;
+      $book = Buku::where('kode', $this->kode_buku)->first();
+      if (! $book) {
+        return session()->flash('gagal', 'Kode buku tidak ditemukan');
+      }
+
+      $findData = Arr::where($this->product, function ($value, $key) use ($book) {
+          return $value['id'] == $book->id;
       });
 
       if ($findData) {
         return session()->flash('gagal', 'Buku sudah ada dalam daftar');
       }
       
-      $book = Buku::where('id', $this->product_id)->first();
-
-      if ($book) {
-        $this->product[] = $book;
-        $this->product_id = '';
-      }
+      $this->product[] = $book;
+      $this->kode_buku = '';
+      // session()->flash('sukses', 'Data berhasil ditambahkan.');
     }
     
     public function create()

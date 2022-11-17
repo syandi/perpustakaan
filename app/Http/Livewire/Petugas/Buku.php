@@ -18,7 +18,7 @@ class Buku extends Component
     protected $paginationTheme = 'bootstrap';
     use WithFileUploads;
 
-    public $create, $edit, $delete, $show;
+    public $create, $edit, $delete, $show, $copy;
     public $kategori, $rak, $penerbit;
     public $kategori_id, $rak_id, $penerbit_id, $baris, $status, $kondisi;
     public $kode, $judul, $stok, $penulis, $sampul, $buku_id, $search, $catatan;
@@ -101,12 +101,16 @@ class Buku extends Component
         $this->catatan = $buku->catatan;
     }
 
-    public function edit(ModelsBuku $buku)
+    public function edit(ModelsBuku $buku, $type = 'edit')
     {
         $this->format();
 
-        $this->edit = true;
-        $this->kode = $buku->kode;
+        if ($type == 'edit') {
+          $this->kode = $buku->kode;
+          $this->edit = true;
+        } else {
+          $this->copy = true;
+        }
         $this->buku_id = $buku->id;
         $this->judul = $buku->judul;
         $this->penulis = $buku->penulis;
@@ -169,6 +173,31 @@ class Buku extends Component
         $this->format();
     }
 
+    public function duplicate()
+    {
+        $this->validate();
+
+        $this->sampul = $this->sampul->store('buku', 'public');
+
+        ModelsBuku::create([
+            'kode' => $this->kode,
+            'sampul' => $this->sampul,
+            'judul' => $this->judul,
+            'penulis' => $this->penulis,
+            'stok' => 1,
+            'kategori_id' => $this->kategori_id,
+            'rak_id' => $this->rak_id,
+            'penerbit_id' => $this->penerbit_id,
+            'status' => $this->status,
+            'kondisi' => $this->kondisi,
+            'catatan' => $this->catatan,
+            'slug' => Str::slug($this->judul)
+        ]);
+
+        session()->flash('sukses', 'Data berhasil ditambahkan.');
+        $this->format();
+    }
+
     public function delete(ModelsBuku $buku)
     {
         $this->format();
@@ -193,11 +222,15 @@ class Buku extends Component
 
     public function render()
     {
+        $buku = ModelsBuku::latest();
+
         if ($this->search) {
-            $buku = ModelsBuku::latest()->where('judul', 'like', '%'. $this->search .'%')->paginate(5);
-        } else {
-            $buku = ModelsBuku::latest()->paginate(5);
+            $buku = $buku->where('judul', 'like', '%'. $this->search .'%')
+                        ->orWhere('kode', 'like', '%'. $this->search .'%')
+                        ->orWhere('penulis', 'like', '%'. $this->search .'%');
         }
+        
+        $buku = $buku->paginate(15);
 
         return view('livewire.petugas.buku', compact('buku'));
     }
@@ -208,6 +241,7 @@ class Buku extends Component
         unset($this->delete);
         unset($this->edit);
         unset($this->show);
+        unset($this->copy);
         unset($this->buku_id);
         unset($this->judul);
         unset($this->sampul);
