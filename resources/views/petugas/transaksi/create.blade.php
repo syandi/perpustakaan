@@ -10,9 +10,14 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="nik">NIK Siswa</label>
+                    <label for="nik">NIK</label>
                     <input wire:model="nik" type="text" class="form-control" id="nik" min="1">
                     @error('nik') <small class="text-danger">{{ $message }}</small> @enderror
+                </div>
+                <div class="form-group">
+                    <label for="nama">Nama Siswa</label>
+                    <input wire:model="nama" type="text" class="form-control" id="nama" min="1">
+                    @error('nama') <small class="text-danger">{{ $message }}</small> @enderror
                 </div>
                 <div class="form-group">
                     <label for="tanggal_pinjam">Tanggal Pinjam</label>
@@ -26,18 +31,12 @@
                 </div>
                 <div class="form-group">
                     <label for="items">Buku yang dipinjam</label>
-                    @error('product') <small class="text-danger">{{ $message }}</small> @enderror
-                    @foreach ($product as $item)
+                    @error('buku') <small class="text-danger">{{ $message }}</small> @enderror
+                    @foreach ($buku as $item)
                     <p class="form-control">{{ $item['judul'] }}</p>
                     @endforeach
                 </div>
                 <div class="form-group d-flex">
-                    <!-- <select wire:model="kode_buku" id="kode_buku" class="form-control">
-                      @foreach ($books as $key => $item)
-                          <option value="" hidden>Pilih Buku</option>
-                          <option value="{{ $item->id }}">{{ $item->judul }}</option>
-                      @endforeach
-                    </select> -->
                     <input wire:model="kode_buku" type="text" class="form-control" id="key" placeholder="Masukkan kode Buku">
                     <button type="button" wire:click="addProduct" class="btn btn-primary ml-2">
                       Cari
@@ -56,7 +55,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -74,23 +73,11 @@
                           </tr>
                       </thead>
                       <tbody>
-                        @foreach ($books as $key => $book)
-                            <tr>
-                                <th scope="row">{{ $key+1 }}</th>
-                                <td>{{ $book->judul }}</td>
-                                <td>{{ $book->penulis}}</td>
-                                <!-- <td>{{ $book->kategori_id}}</td> -->
-                                <td>
-                                    <a onclick="productSelected( {{$book}} )" href="#"
-                                        class="btn btn-success btn-sm">Pilih</a>
-                                </td>
-                            </tr>
-                        @endforeach
                       </tbody>
                   </table>
               </div>
           </div>
         </div>
       </div>
-  </div>
+  </div> -->
 @endif

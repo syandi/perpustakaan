@@ -4,6 +4,7 @@
     @include('admin-lte/flash')
 
     @include('petugas/transaksi/create')
+    @include('petugas/transaksi/show')
 
     <div class="btn-group mb-3">
         <button wire:click="format" class="btn btn-sm bg-teal mr-2">Semua</button>
@@ -34,13 +35,13 @@
             <table class="table table-hover text-nowrap">
                 <thead>
                 <tr>
-                    <th width="10%">No</th>
-                    <th>Kode Pinjam</th>
+                    <th width="5%">No</th>
+                    <th>Peminjam</th>
                     <th>Buku</th>
                     <th>Lokasi</th>
                     <th>Tanggal Pinjam</th>
                     <th>Tanggal Kembali</th>
-                    <th>Denda</th>
+                    <!-- <th>Denda</th> -->
                     <th>Status</th>
                    @if (!$selesai_dipinjam)
                         <th width="15%">Aksi</th>
@@ -51,24 +52,27 @@
                 @foreach ($transaksi as $item)
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>{{$item->kode_pinjam}}</td>
+                        <td>
+                          <b>{{$item->peminjam_id}}</b><br>
+                          {{$item->nama_peminjam}}
+                        </td>
                         <td>
                             <ul>
                                 @foreach ($item->detail_peminjaman as $detail_peminjaman)
-                                <li>{{$detail_peminjaman->buku->judul}}</li>
+                                <li>{{$detail_peminjaman->nama_buku}}</li>
                                 @endforeach
                             </ul>
                         </td>
                        <td>
                             <ul>
                                 @foreach ($item->detail_peminjaman as $detail_peminjaman)
-                                <li>{{$detail_peminjaman->buku->rak->lokasi}}</li>
+                                <li>{{$detail_peminjaman->lokasi}}</li>
                                 @endforeach
                             </ul>
                         </td>
                         <td>{{$item->tanggal_pinjam}}</td>
                         <td>{{$item->tanggal_kembali}}</td>
-                        <td>{{$item->denda}}</td>
+                        <!-- <td>{{$item->denda}}</td> -->
                         <td>
                             @if ($item->status == 0)
                                 <span class="badge bg-indigo">Loading</span>
@@ -82,11 +86,12 @@
                         </td>
                        @if (!$selesai_dipinjam)
                             <td>
+                                    <button wire:click="show({{$item->id}})" class="btn btn-sm btn-secondary">Detail</button>
                                 @if ($item->status == 1)
-                                    <span wire:click="pinjam({{$item->id}})" class="btn btn-sm btn-success mr-2">Pinjam</span>
-                                    <span wire:click="batal({{$item->id}})" class="btn btn-sm btn-danger mr-2">Batal</span>
+                                    <button wire:click="selectedId({{$item->id}}, 'pinjam')" type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#exampleModal">Pinjam</button>
+                                    <button wire:click="selectedId({{$item->id}}, 'batal')" type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">Batal</button>
                                 @elseif ($item->status == 2)
-                                    <span wire:click="kembali({{$item->id}})" class="btn btn-sm btn-primary mr-2">Kembali</span>
+                                    <button wire:click="selectedId({{$item->id}}, 'kembali')" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">Kembali</button>
                                 @endif
                             </td>
                        @endif
@@ -96,6 +101,32 @@
             </table>
         </div>
         <!-- /.card-body -->
+        <!-- modal -->
+        <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true close-btn">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Apakah anda yakin akan melanjutkan aksi ini?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Keluar</button>
+                        @if($peminjaman_id && $action_type == 'pinjam')
+                        <button type="button" wire:click.prevent="pinjam()" class="btn btn-danger close-modal" data-dismiss="modal">Iya, Pinjamkan</button>
+                        @elseif($peminjaman_id && $action_type == 'batal')
+                        <button type="button" wire:click.prevent="batal()" class="btn btn-danger close-modal" data-dismiss="modal">Iya, Batalkan</button>
+                        @elseif($peminjaman_id && $action_type == 'kembali')
+                        <button type="button" wire:click.prevent="kembali()" class="btn btn-danger close-modal" data-dismiss="modal">Iya, Lanjutkan</button>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
       @endif
     </div>
     <!-- /.card -->

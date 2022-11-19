@@ -17,6 +17,8 @@ class CreateDetailPeminjamanTable extends Migration
             $table->id();
             $table->foreignId('peminjaman_id');
             $table->foreignId('buku_id')->constrained('buku');
+            $table->string('nama_buku');
+            $table->string('lokasi');
             $table->timestamps();
         });
     }
