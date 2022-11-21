@@ -3,7 +3,7 @@
             <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                <h4 class="modal-title">Edit Buku</h4>
+                <h4 class="modal-title">{{ $edit ? 'Edit Buku' : 'Tambah Buku' }}</h4>
                 <span wire:click="format" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </span>

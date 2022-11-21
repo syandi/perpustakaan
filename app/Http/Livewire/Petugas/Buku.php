@@ -243,6 +243,7 @@ class Buku extends Component
         unset($this->show);
         unset($this->copy);
         unset($this->buku_id);
+        unset($this->kode);
         unset($this->judul);
         unset($this->sampul);
         unset($this->stok);

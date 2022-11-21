@@ -51,13 +51,13 @@
                           </tr>
                         </thead>
                         <tbody>
+                          @foreach($detail->detail_peminjaman as $key => $detail)
                           <tr>
-                            @foreach($detail->detail_peminjaman as $key => $detail)
                             <th scope="row">{{$key+1}}</th>
                             <td>{{$detail->nama_buku}}</td>
                             <td>{{$detail->lokasi}}</td>
-                            @endforeach
                           </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>
