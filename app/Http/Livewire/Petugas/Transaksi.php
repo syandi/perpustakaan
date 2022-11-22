@@ -218,9 +218,6 @@ class Transaksi extends Component
         elseif ($this->selesai_dipinjam) {
           $transaksi = $transaksi->where('status', 3);
         }
-        else {
-          $transaksi = $transaksi->where('status', '!=', 0);
-        }
 
         if ($this->search) {
           $transaksi = $transaksi->where('kode_pinjam', 'like', '%'. $this->search .'%')
