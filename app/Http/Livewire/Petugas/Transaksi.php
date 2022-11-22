@@ -223,7 +223,9 @@ class Transaksi extends Component
         }
 
         if ($this->search) {
-          $transaksi = $transaksi->where('kode_pinjam', 'like', '%'. $this->search .'%');
+          $transaksi = $transaksi->where('kode_pinjam', 'like', '%'. $this->search .'%')
+                        ->orWhere('peminjam_id', 'like', '%'. $this->search .'%')
+                        ->orWhere('nama_peminjam', 'like', '%'. $this->search .'%');
         }
 
         $transaksi = $transaksi->paginate(10);
