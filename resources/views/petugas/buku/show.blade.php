@@ -1,7 +1,7 @@
  @if ($show)
         <div class="modal fade show" id="modal-default" style="display: block; padding-right: 17px;">
             <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content overflow-auto" style="max-height: 600px">
                 <div class="modal-header">
                 <h4 class="modal-title">Lihat Buku</h4>
                 <span wire:click="format" type="button" class="close" data-dismiss="modal" aria-label="Close">

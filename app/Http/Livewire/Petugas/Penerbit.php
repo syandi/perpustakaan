@@ -17,7 +17,7 @@ class Penerbit extends Component
     public $nama, $penerbit_id, $search;
 
     protected $rules = [
-        'nama' => 'required',
+        'nama' => 'required|unique:penerbit',
     ];
 
     public function create()

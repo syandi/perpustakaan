@@ -17,7 +17,7 @@ class Kategori extends Component
     public $create, $edit, $delete, $nama, $kategori_id, $search;
 
     protected $rules = [
-        'nama' => 'required|min:5',
+        'nama' => 'required|min:5|unique:kategori',
     ];
 
     public function create()
