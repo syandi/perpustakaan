@@ -8,7 +8,7 @@
                     <span aria-hidden="true">&times;</span>
                 </span>
                 </div>
-                <div class="modal-body" style="height: 400px; overflow-y: auto;">
+                <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
                     <div class="form-group">
                         <label for="rak">Rak</label>
                         <input wire:model="rak" type="number" class="form-control" id="rak" min="1">
