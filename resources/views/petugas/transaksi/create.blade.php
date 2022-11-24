@@ -1,14 +1,14 @@
  @if ($create ?? '')
     <div class="modal fade show" id="modal-default" style="display: block; padding-right: 17px;">
-        <div class="modal-dialog">
-        <div class="modal-content overflow-auto" style="max-height: 600px">
+        <div class="modal-dialog" style="overflow-y: initial !important">
+        <div class="modal-content">
             <div class="modal-header">
             <h4 class="modal-title">Tambah Peminjaman</h4>
             <span wire:click="format" type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </span>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: 400px; overflow-y: auto;">
                 <div class="form-group">
                     <label for="nik">NIK</label>
                     <input wire:model="nik" type="text" class="form-control" id="nik" min="1">

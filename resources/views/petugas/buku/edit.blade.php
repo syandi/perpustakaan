@@ -1,14 +1,14 @@
  @if ($edit || $copy)
         <div class="modal fade show" id="modal-default" style="display: block; padding-right: 17px;">
-            <div class="modal-dialog modal-lg">
-            <div class="modal-content overflow-auto" style="max-height: 600px">
+            <div class="modal-dialog modal-lg" style="overflow-y: initial !important">
+            <div class="modal-content">
                 <div class="modal-header">
                 <h4 class="modal-title">{{ $edit ? 'Edit Buku' : 'Tambah Buku' }}</h4>
                 <span wire:click="format" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </span>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="height: 400px; overflow-y: auto;">
                     <div class="form-group">
                         <label for="kode">Kode Buku</label>
                         <input wire:model="kode" type="text" class="form-control" id="kode">
