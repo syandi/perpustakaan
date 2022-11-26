@@ -69,6 +69,15 @@
           </li>
 
           <li class="nav-item">
+            <a href="/siswa" class="nav-link @yield('active-siswa')">
+              <i class="fas fa-user"></i>
+              <p>
+                Siswa
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="/transaksi" class="nav-link @yield('active-transaksi')">
               <i class="fas fa-hands"></i>
               <p>
