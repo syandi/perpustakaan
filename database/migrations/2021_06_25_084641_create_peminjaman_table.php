@@ -16,7 +16,8 @@ class CreatePeminjamanTable extends Migration
         Schema::create('peminjaman', function (Blueprint $table) {
             $table->id();
             $table->string('kode_pinjam');
-            $table->string('peminjam_id');
+            $table->foreignId('siswa_id')->constrained('siswa');
+            $table->string('nis');
             $table->string('nama_peminjam');
             $table->foreignId('petugas_pinjam')->nullable();
             $table->foreignId('petugas_kembali')->nullable();
