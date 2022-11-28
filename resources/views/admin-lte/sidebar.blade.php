@@ -70,7 +70,7 @@
 
           <li class="nav-item">
             <a href="/siswa" class="nav-link @yield('active-siswa')">
-              <i class="fas fa-user"></i>
+              <i class="fas fa-user mr-1"></i>
               <p>
                 Siswa
               </p>
@@ -79,7 +79,7 @@
 
           <li class="nav-item">
             <a href="/transaksi" class="nav-link @yield('active-transaksi')">
-              <i class="fas fa-hands"></i>
+              <i class="fas fa-hands mr-1"></i>
               <p>
                 Transaksi
               </p>
@@ -100,9 +100,20 @@
 
               <li class="nav-item">
                 <a href="/user" class="nav-link @yield('active-user')">
-                  <i class="fas fa-users"></i>
+                  <i class="fas fa-users mr-1"></i>
                   <p>
                     User
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-header">Laporan</li>
+
+              <li class="nav-item">
+                <a href="/laporan/peminjaman" class="nav-link @yield('active-laporan-peminjaman')">
+                  <i class="fas fa-file-pdf mr-1"></i>
+                  <p>
+                    Peminjaman
                   </p>
                 </a>
               </li>

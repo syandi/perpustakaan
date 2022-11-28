@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\LaporanPeminjamanController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CekRoleController;
 use App\Http\Controllers\Peminjam\BukuController as PeminjamBukuController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Petugas\PenerbitController;
 use App\Http\Controllers\Petugas\RakController;
 use App\Http\Controllers\Petugas\SiswaController;
 use App\Http\Controllers\Petugas\TransaksiController;
+use App\Http\Livewire\Admin\Laporan\Peminjaman;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,5 +46,6 @@ Route::middleware(['auth'])->group(function () {
     // role admin
     Route::middleware(['role:admin'])->group(function () {
         Route::get('/user', UserController::class);
+        Route::get('/laporan/peminjaman', LaporanPeminjamanController::class);
     });
 });

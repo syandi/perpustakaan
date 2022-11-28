@@ -2,7 +2,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0">@yield('title')</h1>
+            <h1 class="m-0 text-lg font-weight-bold">@yield('title')</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
