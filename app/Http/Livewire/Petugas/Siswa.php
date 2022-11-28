@@ -17,8 +17,8 @@ class Siswa extends Component
     public $create, $edit, $delete, $nis, $nama, $siswa_id, $search;
 
     protected $rules = [
-        'nis' => 'required|integer|unique:siswa',
-        'nama' => 'required|min:5',
+        'nis' => 'required|integer',
+        'nama' => 'required|min:3',
     ];
 
     public function create()
@@ -31,6 +31,11 @@ class Siswa extends Component
     public function store()
     {
         $this->validate();
+
+        $invalid = ModelsSiswa::where('nis', $this->nis)->first();
+        if ($invalid) {
+          return session()->flash('gagal', 'No. Induk Siswa sudah ada');
+        }
 
         Modelssiswa::create([
             'nis' => $this->nis,
@@ -76,7 +81,10 @@ class Siswa extends Component
 
     public function destroy(Modelssiswa $siswa)
     {
-        $siswa = Buku::where('id', $siswa->id)->get();
+        $siswa = ModelsSiswa::where('id', $siswa->id)->first();
+        if (! $siswa) {
+          return session()->flash('gagal', 'Data siswa tidak ditemukan');
+        }
 
         $siswa->delete();
 
@@ -108,10 +116,11 @@ class Siswa extends Component
 
     public function format()
     {
-        unset($this->siswa_id);
-        unset($this->nama);
         unset($this->create);
         unset($this->edit);
         unset($this->delete);
+        unset($this->siswa_id);
+        unset($this->nis);
+        unset($this->nama);
     }
 }

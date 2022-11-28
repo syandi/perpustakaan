@@ -1,12 +1,30 @@
-  @if ($create)
-        <div class="card">
-            <div class="card-body">
-                <div class="form-group">
-                    <label for="nama">Kategori</label>
-                    <input wire:model="nama" type="text" class="form-control" id="nama" name="nama">
-                    @error('nama') <small class="text-danger">{{ $message }}</small> @enderror
+ @if ($create)
+        <div class="modal fade show" id="modal-default" style="display: block; padding-right: 17px;">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title">Tambah Siswa</h4>
+                <span wire:click="format" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </span>
                 </div>
-                <span wire:click="store" class="btn btn-sm btn-success">Simpan</span>
+                <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                    <div class="form-group">
+                        <label for="nis">NIS</label>
+                        <input wire:model="nis" type="number" class="form-control" id="nis" min="1">
+                        @error('nis') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="nama">Nama Siswa</label>
+                        <input wire:model="nama" type="text" class="form-control" id="nama" min="1">
+                        @error('nama') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                <span wire:click="format" type="button" class="btn btn-default" data-dismiss="modal">Batal</span>
+                <span type="button" wire:click="store" class="btn btn-success">Simpan</span>
+                </div>
+            </div>
             </div>
         </div>
     @endif
