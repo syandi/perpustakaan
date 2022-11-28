@@ -17,8 +17,8 @@ class CreatePeminjamanTable extends Migration
             $table->id();
             $table->string('kode_pinjam');
             $table->foreignId('siswa_id')->constrained('siswa');
-            $table->string('nis');
-            $table->string('nama_peminjam');
+            $table->string('nis_siswa');
+            $table->string('nama_siswa');
             $table->foreignId('petugas_pinjam')->nullable();
             $table->foreignId('petugas_kembali')->nullable();
             $table->integer('status');

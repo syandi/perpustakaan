@@ -10,14 +10,20 @@
             </div>
             <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
                 <div class="form-group">
-                    <label for="nik">NIK</label>
-                    <input wire:model="nik" type="text" class="form-control" id="nik" min="1">
-                    @error('nik') <small class="text-danger">{{ $message }}</small> @enderror
-                </div>
-                <div class="form-group">
-                    <label for="nama">Nama Siswa</label>
-                    <input wire:model="nama" type="text" class="form-control" id="nama" min="1">
-                    @error('nama') <small class="text-danger">{{ $message }}</small> @enderror
+                  <label for="nis_siswa">NIS</label>
+                  <div class="d-flex">
+                    <input wire:model="nis_siswa" type="text" class="form-control" id="key" placeholder="Masukkan NIS Siswa">
+                    <button type="button" wire:click="addSiswa" class="btn btn-primary ml-2">
+                      Cari
+                    </button>
+                  </div>
+                  @error('nis_siswa') <small class="text-danger">{{ $message }}</small> @enderror
+                  @if($siswa)
+                  <div class="form-group mt-2">
+                    <label for="nama_siswa">Siswa</label>
+                    <p type="text" class="form-control">{{$siswa->nama}}</p>
+                  </div>
+                  @endif
                 </div>
                 <div class="form-group">
                     <label for="tanggal_pinjam">Tanggal Pinjam</label>

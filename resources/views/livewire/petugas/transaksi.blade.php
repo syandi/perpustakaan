@@ -53,8 +53,8 @@
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>
-                          <b>{{$item->peminjam_id}}</b><br>
-                          {{$item->nama_peminjam}}
+                          <b>{{$item->nis_siswa}}</b><br>
+                          {{$item->nama_siswa}}
                         </td>
                         <td>
                             <ul>

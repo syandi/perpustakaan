@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Petugas;
 use App\Models\Buku;
 use App\Models\DetailPeminjaman;
 use App\Models\Peminjaman;
+use App\Models\Siswa;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cookie;
@@ -19,8 +20,8 @@ class Transaksi extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $create, $show, $belum_dipinjam, $sedang_dipinjam, $selesai_dipinjam, $search;
-    public $nik, $nama, $tanggal_pinjam, $tanggal_kembali;
-    public $buku = [], $kode_buku;
+    public $tanggal_pinjam, $tanggal_kembali;
+    public $buku = [], $kode_buku, $nis_siswa, $siswa;
     public $action_type, $peminjaman_id, $detail;
 
     public function addProduct() {
@@ -41,6 +42,15 @@ class Transaksi extends Component
       $this->kode_buku = '';
       // session()->flash('sukses', 'Data berhasil ditambahkan.');
     }
+
+    public function addSiswa() {
+      $result = Siswa::where('nis', $this->nis_siswa)->first();
+      if (! $result) {
+        return session()->flash('gagal', 'NIS tidak ditemukan');
+      }
+      
+      $this->siswa = $result;
+    }
     
     public function create()
     {
@@ -59,15 +69,18 @@ class Transaksi extends Component
     public function store()
     {
       $this->validate([
-          'nik' => 'required|string',
-          'nama' => 'required|string',
+          'nis_siswa' => 'required',
           'tanggal_pinjam' => 'required',
           'tanggal_kembali' => 'required',
           'buku' => 'required|array|min:1',
       ]);
 
-      $checkUser = Peminjaman::where('peminjam_id', $this->nik)->where('status', '!=', 3)->first();
-      if ($checkUser) {
+      if (! $this->siswa) {
+        return session()->flash('gagal', 'Siswa tidak valid');
+      }
+
+      $exist = Peminjaman::where('siswa_id', $this->siswa->id)->where('status', '!=', 3)->first();
+      if ($exist) {
         return session()->flash('gagal', 'Terdapat peminjaman yang masih aktif untuk NIK ini');
       }
 
@@ -75,8 +88,9 @@ class Transaksi extends Component
       {
         $peminjaman = new Peminjaman();
         $peminjaman->kode_pinjam = Str::random(9);
-        $peminjaman->peminjam_id = $this->nik;
-        $peminjaman->nama_peminjam = $this->nama;
+        $peminjaman->siswa_id = $this->siswa->id;
+        $peminjaman->nis_siswa = $this->siswa->nis;
+        $peminjaman->nama_siswa = $this->siswa->nama;
         $peminjaman->petugas_pinjam = auth()->user()->id;
         $peminjaman->status = 1;
         $peminjaman->denda = 0;
@@ -221,8 +235,8 @@ class Transaksi extends Component
 
         if ($this->search) {
           $transaksi = $transaksi->where('kode_pinjam', 'like', '%'. $this->search .'%')
-                        ->orWhere('peminjam_id', 'like', '%'. $this->search .'%')
-                        ->orWhere('nama_peminjam', 'like', '%'. $this->search .'%');
+                        ->orWhere('nis_siswa', 'like', '%'. $this->search .'%')
+                        ->orWhere('nama_siswa', 'like', '%'. $this->search .'%');
         }
 
         $transaksi = $transaksi->paginate(10);
