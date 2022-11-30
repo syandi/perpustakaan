@@ -7,6 +7,11 @@
 
     @include('admin/laporan/peminjaman/periode')
 
+    <div class="btn-group mb-3">
+        <button wire:click="peminjaman" class="btn btn-sm bg-teal mr-2">Peminjaman Buku</button>
+        <button wire:click="peminjam" class="btn btn-sm bg-indigo mr-2">Peminjam</button>
+    </div>
+
     <div class="card">
         <div class="card-header">
              <button wire:click="periode" class="btn btn-primary text-xs"><i class="fas fa-plus mr-1"></i> Ubah Periode</button>
@@ -30,18 +35,28 @@
                   <thead>
                   <tr>
                       <th width="10%">No</th>
-                      <th>Nama Buku</th>
+                      <th>{{ $peminjam ? "Nama Siswa" : "Nama Buku"}}</th>
                       <th>Total</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach ($datas as $item)
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$item->nama_buku}}</td>
-                            <td>{{$item->total}}</td>
-                        </tr>
-                    @endforeach
+                    @if ($peminjam)
+                      @foreach ($datas as $item)
+                          <tr>
+                              <td>{{$loop->iteration}}</td>
+                              <td><b>{{$item->nis_siswa}}</b><br>{{$item->siswa->nama}}</td>
+                              <td>{{$item->total}}</td>
+                          </tr>
+                      @endforeach
+                    @else
+                      @foreach ($datas as $item)
+                          <tr>
+                              <td>{{$loop->iteration}}</td>
+                              <td>{{$item->nama_buku}}</td>
+                              <td>{{$item->total}}</td>
+                          </tr>
+                      @endforeach
+                    @endif
                     </tbody>
               </table>
             </div>

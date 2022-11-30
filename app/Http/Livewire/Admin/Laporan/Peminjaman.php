@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Laporan;
 
 use App\Models\DetailPeminjaman;
+use App\Models\Peminjaman as ModelsPeminjaman;
 use App\Models\User as ModelsUser;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -17,16 +18,30 @@ class Peminjaman extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $from, $to, $search;
-    public $periode, $title;
+    public $peminjam, $periode, $title;
 
     protected function rules()
     {
         return [];
     }
 
+    public function peminjam()
+    {
+      $this->format();
+
+      $this->peminjam = true;
+    }
+
+    public function peminjaman()
+    {
+      $this->format();
+
+      $this->peminjam = false;
+    }
+
     public function periode()
     {
-        $this->format();
+        // $this->format();
 
         $this->periode = true;
     }
@@ -48,15 +63,27 @@ class Peminjaman extends Component
 
         $this->title = "Laporan Peminjaman " . tanggal_indonesia($this->from) . ' s/d '. tanggal_indonesia($this->to);
 
-        $datas = DetailPeminjaman::select('buku_id', 'nama_buku', DB::raw('count(id) as total'))
-                ->groupBy('buku_id')->groupBy('nama_buku');
+        $datas = DetailPeminjaman::query();
+
+        if ($this->peminjam) {
+          $datas = ModelsPeminjaman::with('siswa')->select('siswa_id', 'nis_siswa', DB::raw('count(id) as total'))
+                  ->groupBy('siswa_id')->groupBy('nis_siswa');
+        } else {
+          $datas = DetailPeminjaman::select('buku_id', 'nama_buku', DB::raw('count(id) as total'))
+                  ->groupBy('buku_id')->groupBy('nama_buku');
+        }
 
         if (strtotime($this->from) <= strtotime($this->to)) {
             $datas = $datas->whereBetween('created_at', ["$this->from 00:00:00", "$this->to 23:59:59"]);
         }
 
         if ($this->search) {
-            $datas = $datas->where('nama_buku', 'like', '%'. $this->search .'%');
+            if ($this->peminjam) {
+              $datas = $datas->where('nis_siswa', 'like', '%'. $this->search .'%')
+                        ->orWhere('nama_siswa', 'like', '%'. $this->search .'%');
+            } else {
+              $datas = $datas->where('nama_buku', 'like', '%'. $this->search .'%');
+            }
         }
 
         $datas = $datas->paginate(10);
@@ -66,6 +93,7 @@ class Peminjaman extends Component
 
     public function format()
     {
+        unset($this->peminjam);
         unset($this->title);
         unset($this->periode);
         unset($this->from);

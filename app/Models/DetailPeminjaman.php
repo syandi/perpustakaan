@@ -21,4 +21,9 @@ class DetailPeminjaman extends Model
     {
         return $this->belongsTo(Buku::class);
     }
+
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class);
+    }
 }
