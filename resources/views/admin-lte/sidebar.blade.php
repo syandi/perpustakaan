@@ -23,7 +23,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="/" class="nav-link @yield('active-dashboard')">
+            <a href="{{ url('/') }}" class="nav-link @yield('active-dashboard')">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -42,25 +42,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/kategori" class="nav-link  @yield('active-kategori')">
+                <a href="{{ url('/kategori') }}" class="nav-link  @yield('active-kategori')">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kategori</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/rak" class="nav-link  @yield('active-rak')">
+                <a href="{{ url('/rak') }}" class="nav-link  @yield('active-rak')">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Rak</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/penerbit" class="nav-link  @yield('active-penerbit')">
+                <a href="{{ url('/penerbit') }}" class="nav-link  @yield('active-penerbit')">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Penerbit</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/buku" class="nav-link  @yield('active-buku')">
+                <a href="{{ url('/buku') }}" class="nav-link  @yield('active-buku')">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Buku</p>
                 </a>
@@ -69,7 +69,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/siswa" class="nav-link @yield('active-siswa')">
+            <a href="{{ url('/siswa') }}" class="nav-link @yield('active-siswa')">
               <i class="fas fa-user mr-1"></i>
               <p>
                 Siswa
@@ -78,7 +78,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/transaksi" class="nav-link @yield('active-transaksi')">
+            <a href="{{ url('/transaksi') }}" class="nav-link @yield('active-transaksi')">
               <i class="fas fa-hands mr-1"></i>
               <p>
                 Transaksi
@@ -99,7 +99,7 @@
               <li class="nav-header">ADMIN</li>
 
               <li class="nav-item">
-                <a href="/user" class="nav-link @yield('active-user')">
+                <a href="{{ url('/user') }}" class="nav-link @yield('active-user')">
                   <i class="fas fa-users mr-1"></i>
                   <p>
                     User
@@ -110,7 +110,7 @@
               <li class="nav-header">Laporan</li>
 
               <li class="nav-item">
-                <a href="/laporan/peminjaman" class="nav-link @yield('active-laporan-peminjaman')">
+                <a href="{{ url('/laporan/peminjaman') }}" class="nav-link @yield('active-laporan-peminjaman')">
                   <i class="fas fa-file-pdf mr-1"></i>
                   <p>
                     Peminjaman
