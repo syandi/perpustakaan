@@ -1,2 +1,2 @@
 <!-- ChartJS -->
-<script src="/perpustakaan/public/adminlte/plugins/chart.js/Chart.min.js"></script>
+<script src="/adminlte/plugins/chart.js/Chart.min.js"></script>
