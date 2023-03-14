@@ -13,6 +13,7 @@ use App\Http\Controllers\Petugas\PenerbitController;
 use App\Http\Controllers\Petugas\RakController;
 use App\Http\Controllers\Petugas\SiswaController;
 use App\Http\Controllers\Petugas\TransaksiController;
+use App\Http\Controllers\TipeController;
 use App\Http\Livewire\Admin\Laporan\Peminjaman;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/kategori', KategoriController::class);
         Route::get('/rak', RakController::class);
         Route::get('/penerbit', PenerbitController::class);
+        Route::get('/tipe', TipeController::class);
         Route::get('/buku', BukuController::class);
         Route::get('/transaksi', TransaksiController::class);
         Route::get('/chart', ChartController::class);

@@ -60,6 +60,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ url('/tipe') }}" class="nav-link  @yield('active-tipe')">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tipe</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ url('/buku') }}" class="nav-link  @yield('active-buku')">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Buku</p>
