@@ -6,6 +6,7 @@ use App\Models\Buku as ModelsBuku;
 use App\Models\Kategori;
 use App\Models\Penerbit;
 use App\Models\Rak;
+use App\Models\Tipe;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
@@ -19,11 +20,12 @@ class Buku extends Component
     use WithFileUploads;
 
     public $create, $edit, $delete, $show, $copy;
-    public $kategori, $rak, $penerbit;
-    public $kategori_id, $rak_id, $penerbit_id, $baris, $status, $kondisi;
+    public $tipe, $kategori, $rak, $penerbit;
+    public $tipe_id, $kategori_id, $rak_id, $penerbit_id, $baris, $status, $kondisi;
     public $kode, $judul, $stok, $penulis, $sampul, $buku_id, $search, $catatan;
 
     protected $rules = [
+        'tipe_id' => 'nullable',
         'kode' => 'required',
         'judul' => 'required',
         'penulis' => 'required',
@@ -53,6 +55,7 @@ class Buku extends Component
         $this->format();
 
         $this->create = true;
+        $this->tipe = Tipe::all();
         $this->kategori = Kategori::all();
         $this->penerbit = Penerbit::all();
     }
@@ -64,6 +67,7 @@ class Buku extends Component
         $this->sampul = $this->sampul->store('buku', 'public');
 
         ModelsBuku::create([
+            'tipe_id' => $this->tipe_id,
             'kode' => $this->kode,
             'sampul' => $this->sampul,
             'judul' => $this->judul,
@@ -111,6 +115,8 @@ class Buku extends Component
         } else {
           $this->copy = true;
         }
+        $this->tipe = Tipe::all();
+        $this->tipe_id = $buku->tipe_id;
         $this->buku_id = $buku->id;
         $this->judul = $buku->judul;
         $this->penulis = $buku->penulis;
@@ -129,6 +135,7 @@ class Buku extends Component
     public function update(ModelsBuku $buku)
     {
         $validasi = [
+            'tipe_id' => 'nullable',
             'kode' => 'required',
             'judul' => 'required',
             'penulis' => 'required',
@@ -155,6 +162,7 @@ class Buku extends Component
         }
 
         $buku->update([
+            'tipe_id' => $this->tipe_id,
             'sampul' => $this->sampul,
             'kode' => $this->kode,
             'judul' => $this->judul,
@@ -242,6 +250,7 @@ class Buku extends Component
         unset($this->edit);
         unset($this->show);
         unset($this->copy);
+        unset($this->tipe_id);
         unset($this->buku_id);
         unset($this->kode);
         unset($this->judul);

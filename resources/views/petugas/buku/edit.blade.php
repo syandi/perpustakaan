@@ -10,6 +10,16 @@
                 </div>
                 <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
                     <div class="form-group">
+                        <label for="tipe">Tipe Buku</label>
+                        <select wire:model="tipe_id" class="form-control" id="tipe">
+                            <option selected value="">Pilih Tipe</option>
+                            @foreach ($tipe as $item)
+                                <option value="{{$item->id}}">{{$item->nama}}</option>
+                            @endforeach
+                        </select>
+                        @error('tipe_id') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="kode">Kode Buku</label>
                         <input wire:model="kode" type="text" class="form-control" id="kode">
                         @error('kode') <small class="text-danger">{{ $message }}</small> @enderror

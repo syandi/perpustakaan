@@ -11,6 +11,7 @@ class Buku extends Model
 
     protected $table = 'buku';
     protected $fillable = [
+        'tipe_id',
         'kode',
         'judul',
         'stok',
