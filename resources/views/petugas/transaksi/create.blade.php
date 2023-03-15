@@ -20,7 +20,7 @@
                   @error('nis_siswa') <small class="text-danger">{{ $message }}</small> @enderror
                   @if($siswa)
                   <div class="form-group mt-2">
-                    <label for="nama_siswa">Siswa</label>
+                    <label for="nama_siswa">Nama Pengunjung</label>
                     <p type="text" class="form-control">{{$siswa->nama}}</p>
                   </div>
                   @endif

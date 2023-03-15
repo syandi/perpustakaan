@@ -35,7 +35,7 @@
                   <thead>
                   <tr>
                       <th width="10%">No</th>
-                      <th>{{ $peminjam ? "Nama Siswa" : "Nama Buku"}}</th>
+                      <th>{{ $peminjam ? "Pengunjung" : "Nama Buku"}}</th>
                       <th>Total</th>
                   </tr>
                   </thead>

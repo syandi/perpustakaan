@@ -36,7 +36,7 @@
                 <thead>
                 <tr>
                     <th width="5%">No</th>
-                    <th>Peminjam</th>
+                    <th>Pengunjung</th>
                     <th>Buku</th>
                     <th>Lokasi</th>
                     <th>Tanggal Pinjam</th>
