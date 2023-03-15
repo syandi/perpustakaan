@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\LaporanPeminjamanController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CekRoleController;
+use App\Http\Controllers\LaporanBukuController;
 use App\Http\Controllers\Peminjam\BukuController as PeminjamBukuController;
 use App\Http\Controllers\Peminjam\KeranjangController;
 use App\Http\Controllers\Petugas\BukuController;
@@ -38,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/buku', BukuController::class);
         Route::get('/transaksi', TransaksiController::class);
         Route::get('/chart', ChartController::class);
+        Route::get('/laporan/buku', LaporanBukuController::class);
     });
 
     // role peminjam

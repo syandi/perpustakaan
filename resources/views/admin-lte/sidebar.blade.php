@@ -87,7 +87,7 @@
             <a href="{{ url('/transaksi') }}" class="nav-link @yield('active-transaksi')">
               <i class="fas fa-hands mr-1"></i>
               <p>
-                Transaksi
+                Peminjaman
               </p>
             </a>
           </li>
@@ -119,7 +119,15 @@
                 <a href="{{ url('/laporan/peminjaman') }}" class="nav-link @yield('active-laporan-peminjaman')">
                   <i class="fas fa-file-pdf mr-1"></i>
                   <p>
-                    Peminjaman
+                    Laporan Peminjaman
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/laporan/buku') }}" class="nav-link @yield('active-laporan-buku')">
+                  <i class="fas fa-book mr-1"></i>
+                  <p>
+                    Laporan Buku
                   </p>
                 </a>
               </li>
