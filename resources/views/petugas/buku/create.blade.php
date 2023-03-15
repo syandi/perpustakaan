@@ -10,14 +10,9 @@
                 </div>
                 <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
                     <div class="form-group">
-                        <label for="tipe">Tipe Buku</label>
-                        <select wire:model="tipe_id" class="form-control" id="tipe">
-                            <option selected value="">Pilih Tipe</option>
-                            @foreach ($tipe as $item)
-                                <option value="{{$item->id}}">{{$item->nama}}</option>
-                            @endforeach
-                        </select>
-                        @error('tipe_id') <small class="text-danger">{{ $message }}</small> @enderror
+                        <label for="sampul">Sampul</label>
+                        <input wire:model="sampul" type="file" class="form-control" id="sampul" min="1">
+                        @error('sampul') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
                     <div class="form-group">
                         <label for="kode">Kode Buku</label>
@@ -45,10 +40,17 @@
                             </div>
                         </div> -->
                     </div>
-                    <div class="form-group">
-                        <label for="sampul">Sampul</label>
-                        <input wire:model="sampul" type="file" class="form-control" id="sampul" min="1">
-                        @error('sampul') <small class="text-danger">{{ $message }}</small> @enderror
+                    <div class="row">
+                      <div class="form-group col-md-8">
+                          <label for="tipe">Tipe Buku</label>
+                          <select wire:model="tipe_id" class="form-control" id="tipe">
+                              <option selected value="">Pilih Tipe</option>
+                              @foreach ($tipe as $item)
+                                  <option value="{{$item->id}}">{{$item->nama}}</option>
+                              @endforeach
+                          </select>
+                          @error('tipe_id') <small class="text-danger">{{ $message }}</small> @enderror
+                      </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
